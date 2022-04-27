@@ -21,3 +21,11 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/.idea/.gitignore
+/.idea/dbnavigator.xml
+/.idea/sonarlint/issuestore/index.pb
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/my-material-ui-course-create-react-app.iml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
