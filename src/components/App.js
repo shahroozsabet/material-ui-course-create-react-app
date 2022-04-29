@@ -1,18 +1,18 @@
 import React from 'react';
 import {Header} from "./ui/Header";
+import {ThemeProvider} from "@material-ui/core";
+import theme from "./ui/Theme";
 
 function App() {
-    return (<div className="App">
+    return (<ThemeProvider theme={theme}>
         <Header/>
         {[...new Array(48)]
-            .map(
-                () => `Cras mattis consectetur purus sit amet fermentum.
+            .map(() => `Cras mattis consectetur purus sit amet fermentum.
 Cras justo odio, dapibus ac facilisis in, egestas eget quam.
 Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-            )
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,)
             .join('\n')}
-    </div>);
+    </ThemeProvider>);
 }
 
 export default App;
