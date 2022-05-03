@@ -1,5 +1,5 @@
 import React from "react";
-import {AppBar, Toolbar, useScrollTrigger} from "@material-ui/core";
+import {AppBar, Tab, Tabs, Toolbar, useScrollTrigger} from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
 import logo from "../../assets/logo.svg"
 
@@ -19,8 +19,9 @@ const useStyles = makeStyles(theme => ({
         ...theme.mixins.toolbar, marginBottom: "3em"
     }, logo: {
         height: "7em"
+    }, tabContainer: {
+        marginLeft: "auto"
     }
-
 }));
 
 export function Header(props) {
@@ -31,6 +32,13 @@ export function Header(props) {
             <AppBar position="fixed">
                 <Toolbar disableGutters>
                     <img alt="Company Logo" className={classes.logo} src={logo}/>
+                    <Tabs>
+                        <Tab label="Home"/>
+                        <Tab label="Services"/>
+                        <Tab label="The Revolution"/>
+                        <Tab label="About Us"/>
+                        <Tab label="Contact Us"/>
+                    </Tabs>
                 </Toolbar>
             </AppBar>
         </ElevationScroll>
