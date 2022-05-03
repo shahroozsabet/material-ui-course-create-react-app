@@ -4,11 +4,11 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.4.0",
-    "@material-ui/styles": "^4.11.5",
+    "@material-ui/styles": "^4.4.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
