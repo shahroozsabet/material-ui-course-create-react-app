@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AppBar, Button, Tab, Tabs, Toolbar, useScrollTrigger} from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
-import logo from "../../assets/logo.svg"
+import logo from "../../assets/ShahroozLogo.jpg"
+import {Link} from "react-router-dom";
 
 function ElevationScroll(props) {
     const {children} = props;
@@ -18,7 +19,11 @@ const useStyles = makeStyles(theme => ({
     toolbarMargin: {
         ...theme.mixins.toolbar, marginBottom: "3em"
     }, logo: {
-        height: "7em"
+        height: "8em"
+    }, logoContainer: {
+        padding: 0, "&:hover": {
+            backgrounColor: "transparent"
+        }
     }, tabContainer: {
         marginLeft: "auto"
     }, Tab: {
@@ -36,18 +41,37 @@ export function Header(props) {
         setValue(value);
     };
 
+    useEffect(() => {
+        if (window.location.pathname === "/" && value !== 0) {
+            setValue(0)
+        } else if (window.location.pathname === "/services" && value !== 1) {
+            setValue(1)
+        } else if (window.location.pathname === "/revolution" && value !== 2) {
+            setValue(2)
+        } else if (window.location.pathname === "/about" && value !== 3) {
+            setValue(3)
+        } else if (window.location.pathname === "/contact" && value !== 4) {
+            setValue(4)
+        } else if (window.location.pathname === "/estimate" && value !== 5) {
+            setValue(5)
+        }
+    }, [value])
+
     return (<React.Fragment>
         <ElevationScroll>
             <AppBar position="fixed">
                 <Toolbar disableGutters>
-                    <img alt="Company Logo" className={classes.logo} src={logo}/>
+                    <Button className={classes.logoContainer} component={Link} to={"/"} onClick={() => setValue(0)}
+                            disableRipple>
+                        <img alt="Company Logo" className={classes.logo} src={logo}/>
+                    </Button>
                     <Tabs value={value} onChange={handleChange} indicatorColor={"primary"}
                           className={classes.tabContainer}>
-                        <Tab className={classes.Tab} label="Home"/>
-                        <Tab className={classes.Tab} label="Services"/>
-                        <Tab className={classes.Tab} label="The Revolution"/>
-                        <Tab className={classes.Tab} label="About Us"/>
-                        <Tab className={classes.Tab} label="Contact Us"/>
+                        <Tab className={classes.Tab} component={Link} to={"/"} label="Home"/>
+                        <Tab className={classes.Tab} component={Link} to={"/services"} label="Services"/>
+                        <Tab className={classes.Tab} component={Link} to={"/revolution"} label="The Revolution"/>
+                        <Tab className={classes.Tab} component={Link} to={"/about"} label="About Us"/>
+                        <Tab className={classes.Tab} component={Link} to={"/contact"} label="Contact Us"/>
                     </Tabs>
                     <Button className={classes.Button} variant={"contained"} color={"secondary"}>Free Estimate</Button>
                 </Toolbar>
