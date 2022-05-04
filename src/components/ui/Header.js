@@ -1,5 +1,5 @@
 import React from "react";
-import {AppBar, Tab, Tabs, Toolbar, useScrollTrigger} from "@material-ui/core";
+import {AppBar, Button, Tab, Tabs, Toolbar, useScrollTrigger} from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
 import logo from "../../assets/logo.svg"
 
@@ -23,6 +23,8 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "auto"
     }, Tab: {
         ...theme.typography.tab, minWidth: 10, marginLeft: "25px"
+    }, Button: {
+        ...theme.typography.estimate, borderRadius: "50px", marginLeft: "50px", marginRight: "25px", height: "45px"
     }
 }));
 
@@ -41,6 +43,7 @@ export function Header(props) {
                         <Tab className={classes.Tab} label="About Us"/>
                         <Tab className={classes.Tab} label="Contact Us"/>
                     </Tabs>
+                    <Button className={classes.Button} variant={"contained"} color={"secondary"}>Free Estimate</Button>
                 </Toolbar>
             </AppBar>
         </ElevationScroll>
