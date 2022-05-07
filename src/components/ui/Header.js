@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {AppBar, Button, Tab, Tabs, Toolbar, useScrollTrigger} from "@material-ui/core";
+import {AppBar, Button, Menu, MenuItem, Tab, Tabs, Toolbar, useScrollTrigger} from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
 import logo from "../../assets/ShahroozLogo.jpg"
 import {Link} from "react-router-dom";
@@ -36,10 +36,22 @@ const useStyles = makeStyles(theme => ({
 export function Header(props) {
     const classes = useStyles();
     const [value, setValue] = useState(0);
+    const [anchorEL, setAnchorEl] = useState(null);
+    const [open, setOpen] = useState(false);
 
     const handleChange = (e, value) => {
         setValue(value);
     };
+
+    const handleClick = (e) => {
+        setAnchorEl(e.currentTarget)
+        setOpen(true)
+    }
+
+    const handleClose = (e) => {
+        setAnchorEl(null)
+        setOpen(false)
+    }
 
     useEffect(() => {
         if (window.location.pathname === "/" && value !== 0) {
@@ -57,7 +69,7 @@ export function Header(props) {
         }
     }, [value])
 
-    return (<React.Fragment>
+    return <React.Fragment>
         <ElevationScroll>
             <AppBar position="fixed">
                 <Toolbar disableGutters>
@@ -68,15 +80,24 @@ export function Header(props) {
                     <Tabs value={value} onChange={handleChange} indicatorColor={"primary"}
                           className={classes.tabContainer}>
                         <Tab className={classes.Tab} component={Link} to={"/"} label="Home"/>
-                        <Tab className={classes.Tab} component={Link} to={"/services"} label="Services"/>
+                        <Tab aria-owns={anchorEL ? "simple-menu" : undefined}
+                             aria-haspopup={anchorEL ? "true" : undefined}
+                             onMouseOver={event => handleClick(event)}
+                             className={classes.Tab} component={Link} to={"/services"} label="Services"/>
                         <Tab className={classes.Tab} component={Link} to={"/revolution"} label="The Revolution"/>
                         <Tab className={classes.Tab} component={Link} to={"/about"} label="About Us"/>
                         <Tab className={classes.Tab} component={Link} to={"/contact"} label="Contact Us"/>
                     </Tabs>
                     <Button className={classes.Button} variant={"contained"} color={"secondary"}>Free Estimate</Button>
+                    <Menu open={open} id={"simple-menu"} anchorEl={anchorEL} onClose={handleClose}
+                          MenuListProps={{onMouseLeave: handleClose}}>
+                        <MenuItem onClick={handleClose}>Custom Software</MenuItem>
+                        <MenuItem onClick={handleClose}>Mobile App Development</MenuItem>
+                        <MenuItem onClick={handleClose}>Website Development</MenuItem>
+                    </Menu>
                 </Toolbar>
             </AppBar>
         </ElevationScroll>
         <div className={classes.toolbarMargin}/>
-    </React.Fragment>)
+    </React.Fragment>
 }
