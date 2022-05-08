@@ -30,6 +30,12 @@ const useStyles = makeStyles(theme => ({
         ...theme.typography.tab, minWidth: 10, marginLeft: "25px"
     }, Button: {
         ...theme.typography.estimate, borderRadius: "50px", marginLeft: "50px", marginRight: "25px", height: "45px"
+    }, menu: {
+        backgroundColor: theme.palette.common.blue, color: "white", borderRadius: "0px"
+    }, menuItem: {
+        ...theme.typography.tab, opacity: 0.7, "&:hover": {
+            opacity: 1
+        }
     }
 }));
 
@@ -89,11 +95,51 @@ export function Header(props) {
                         <Tab className={classes.Tab} component={Link} to={"/contact"} label="Contact Us"/>
                     </Tabs>
                     <Button className={classes.Button} variant={"contained"} color={"secondary"}>Free Estimate</Button>
-                    <Menu open={open} id={"simple-menu"} anchorEl={anchorEL} onClose={handleClose}
-                          MenuListProps={{onMouseLeave: handleClose}}>
-                        <MenuItem onClick={handleClose}>Custom Software</MenuItem>
-                        <MenuItem onClick={handleClose}>Mobile App Development</MenuItem>
-                        <MenuItem onClick={handleClose}>Website Development</MenuItem>
+                    <Menu
+                        open={open}
+                        id={"simple-menu"}
+                        anchorEl={anchorEL}
+                        onClose={handleClose}
+                        classes={{paper: classes.menu}}
+                        MenuListProps={{onMouseLeave: handleClose}}
+                        elevation={0}
+                    >
+                        <MenuItem
+                            onClick={() => {
+                                handleClose();
+                                setValue(1)
+                            }}
+                            component={Link}
+                            to={"/services"}
+                            classes={{root: classes.menuItem}}
+                        >Services</MenuItem>
+                        <MenuItem
+                            onClick={() => {
+                                handleClose();
+                                setValue(1)
+                            }}
+                            component={Link}
+                            to={"/customsoftware"}
+                            classes={{root: classes.menuItem}}
+                        >Custom Software</MenuItem>
+                        <MenuItem
+                            onClick={() => {
+                                handleClose();
+                                setValue(1)
+                            }}
+                            component={Link}
+                            to={"/mobileapps"}
+                            classes={{root: classes.menuItem}}
+                        >Mobile App Development</MenuItem>
+                        <MenuItem
+                            onClick={() => {
+                                handleClose();
+                                setValue(1)
+                            }}
+                            component={Link}
+                            to={"/websites"}
+                            classes={{root: classes.menuItem}}
+                        >Website Development</MenuItem>
                     </Menu>
                 </Toolbar>
             </AppBar>
