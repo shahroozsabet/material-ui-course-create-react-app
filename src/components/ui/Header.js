@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 import {
     AppBar,
     Button,
+    IconButton,
     Menu,
     MenuItem,
+    SwipeableDrawer,
     Tab,
     Tabs,
     Toolbar,
@@ -14,6 +16,7 @@ import {
 import {makeStyles} from "@material-ui/styles";
 import logo from "../../assets/ShahroozLogo.jpg"
 import {Link} from "react-router-dom";
+import MenuIcon from "@material-ui/icons/Menu";
 
 function ElevationScroll(props) {
     const {children} = props;
@@ -57,6 +60,16 @@ const useStyles = makeStyles(theme => ({
         ...theme.typography.tab, opacity: 0.7, "&:hover": {
             opacity: 1
         }
+    },
+    drawerIcon: {
+        height: "50px",
+        width: "50px"
+    },
+    drawerIconContainer: {
+        marginLeft: "auto",
+        "&:hover": {
+            backgroundColor: "transparent"
+        }
     }
 }));
 
@@ -64,31 +77,32 @@ export function Header(props) {
     const classes = useStyles();
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"))
+
+    const [openDrawer, setOpenDrawer] = useState(false)
     const [value, setValue] = useState(0);
     const [anchorEL, setAnchorEl] = useState(null);
-    const [open, setOpen] = useState(false);
+    const [openMenu, setOpenMenu] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
-    const handleChange = (e, value) => {
-        setValue(value);
+    const handleChange = (newValue) => {
+        setValue(newValue);
     };
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget)
-        setOpen(true)
+        setOpenMenu(true)
     }
 
     const handleClose = () => {
         setAnchorEl(null)
-        setOpen(false)
+        setOpenMenu(false)
     }
 
     function handleMenuItemClick(i) {
         setAnchorEl(null)
-        setOpen(false)
+        setOpenMenu(false)
         setSelectedIndex(i)
     }
-
 
     let menuOptions = [{name: "Services", link: "/services"}, {
         name: "Custom Software Development", link: "/customsoftware"
@@ -166,7 +180,7 @@ export function Header(props) {
         </Tabs>
         <Button className={classes.Button} variant={"contained"} color={"secondary"}>Free Estimate</Button>
         <Menu
-            open={open}
+            open={openMenu}
             id={"simple-menu"}
             anchorEl={anchorEL}
             onClose={handleClose}
@@ -191,6 +205,25 @@ export function Header(props) {
         </Menu>
     </React.Fragment>)
 
+    const drawer = (
+        <React.Fragment>
+            <SwipeableDrawer
+                onClose={() => setOpenDrawer(false)}
+                onOpen={() => setOpenDrawer(true)}
+                open={openDrawer}
+            >
+                Example Drawer
+            </SwipeableDrawer>
+            <IconButton
+                className={classes.drawerIconContainer}
+                onClick={() => setOpenDrawer(!openDrawer)}
+                disableRipple
+            >
+                <MenuIcon className={classes.drawerIcon}/>
+            </IconButton>
+        </React.Fragment>
+    )
+
     return <React.Fragment>
         <ElevationScroll>
             <AppBar position="fixed">
@@ -199,7 +232,7 @@ export function Header(props) {
                             disableRipple>
                         <img alt="Company Logo" className={classes.logo} src={logo}/>
                     </Button>
-                    {matches ? null : tabs}
+                    {matches ? drawer : tabs}
                 </Toolbar>
             </AppBar>
         </ElevationScroll>
