@@ -82,7 +82,11 @@ const useStyles = makeStyles(theme => ({
     }, drawerItemEstimate: {
         backgroundColor: theme.palette.common.orange
     }, drawerItemSelected: {
-        opacity: 1
+        "& .MuiListItemText-root": {
+            opacity: 1
+        }
+    }, appbar: {
+        zIndex: theme.zIndex.modal + 1
     }
 }));
 
@@ -176,22 +180,24 @@ export function Header(props) {
             classes={{paper: classes.menu}}
             MenuListProps={{onMouseLeave: handleClose}}
             elevation={0}
+            style={{zIndex: 1302}}
             keepMounted
         >
-            {menuOptions.map((option, i) => (<MenuItem
-                key={option}
-                component={Link}
-                to={option.link}
-                classes={{root: classes.menuItem}}
-                onClick={() => {
-                    handleClose();
-                    setValue(1)
-                    handleMenuItemClick(i)
-                }}
-                selected={i === selectedIndex && value === 1}
-            >
-                {option.name}
-            </MenuItem>))}
+            {menuOptions.map((option, i) => (
+                <MenuItem
+                    key={`${option}${i}`}
+                    component={Link}
+                    to={option.link}
+                    classes={{root: classes.menuItem}}
+                    onClick={() => {
+                        handleClose();
+                        setValue(1)
+                        handleMenuItemClick(i)
+                    }}
+                    selected={i === selectedIndex && value === 1}
+                >
+                    {option.name}
+                </MenuItem>))}
         </Menu>
     </React.Fragment>)
 
@@ -203,6 +209,7 @@ export function Header(props) {
                 open={openDrawer}
                 classes={{paper: classes.drawer}}
             >
+                <div className={classes.toolbarMargin}/>
                 <List disablePadding>
                     {routes.map(route => (
                         <ListItem
@@ -212,13 +219,16 @@ export function Header(props) {
                             component={Link}
                             to={route.link}
                             selected={value === route.activeIndex}
+                            classes={{selected: classes.drawerItemSelected}}
                             onClick={() => {
                                 setOpenDrawer(false);
                                 setValue(route.activeIndex)
                             }}>
-                            <ListItemText className={value === route.activeIndex ?
-                                [classes.drawerItem, classes.drawerItemSelected] :
-                                classes.drawerItem} disableTypography>{route.name}</ListItemText>
+                            <ListItemText
+                                className={classes.drawerItem}
+                                disableTypography>
+                                {route.name}
+                            </ListItemText>
                         </ListItem>
                     ))}
                     <ListItem
@@ -227,10 +237,13 @@ export function Header(props) {
                             setValue(5)
                         }
                         }
-                        divider button component={Link}
-                        className={value === 5 ?
-                            [classes.drawerItem, classes.drawerItemSelected] :
-                            classes.drawerItemEstimate}
+                        divider
+                        button
+                        component={Link}
+                        classes={{
+                            root: classes.drawerItemEstimate,
+                            selected: classes.drawerItemSelected
+                        }}
                         to={"/estimate"}
                         selected={value === 5}
                     >
@@ -252,7 +265,10 @@ export function Header(props) {
 
     return <React.Fragment>
         <ElevationScroll>
-            <AppBar position="fixed">
+            <AppBar
+                position="fixed"
+                className={classes.appbar}
+            >
                 <Toolbar disableGutters>
                     <Button className={classes.logoContainer} component={Link} to={"/"} onClick={() => setValue(0)}
                             disableRipple>
