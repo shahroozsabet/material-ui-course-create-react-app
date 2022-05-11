@@ -132,7 +132,7 @@ export function Header(props) {
     const [openMenu, setOpenMenu] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
-    const handleChange = (newValue) => {
+    const handleChange = (e, newValue) => {
         setValue(newValue);
     };
 
