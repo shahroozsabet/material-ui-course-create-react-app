@@ -199,7 +199,7 @@ export function Footer(props) {
               spacing={2} className={classes.socialContainer}>
             <Grid
                 item component={"a"}
-                href={"http://www.facebook.com"}
+                href={"https://www.facebook.com/shahrooz.sabet/"}
                 rel={"noopener noreferrer"}
                 target={"_blank"}
             >
@@ -209,7 +209,7 @@ export function Footer(props) {
             </Grid>
             <Grid
                 item component={"a"}
-                href={"http://www.twitter.com"}
+                href={"https://twitter.com/shahroozsabet"}
                 rel={"noopener noreferrer"}
                 target={"_blank"}
             >
@@ -219,7 +219,7 @@ export function Footer(props) {
             </Grid>
             <Grid
                 item component={"a"}
-                href={"http://www.instagram.com"}
+                href={"https://www.instagram.com/shahrooz_sabet/"}
                 rel={"noopener noreferrer"}
                 target={"_blank"}
             >
