@@ -17,7 +17,7 @@ import {
     useTheme
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
-import logo from "../../assets/ShahroozLogo.jpg"
+import logo from "../../assets/logo.svg"
 import {Link} from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 
