@@ -5,7 +5,7 @@ import {Grid, Hidden, makeStyles} from "@material-ui/core";
 import footerAdornment from '../../assets/Footer Adornment.svg'
 import facebook from '../../assets/facebook.svg'
 import instagram from '../../assets/instagram.svg'
-import twitter from '../../assets/twitter.svg'
+import linkedin from '../../assets/linkedin.svg'
 
 const useStyles = makeStyles(theme => ({
     footer: {
@@ -209,11 +209,11 @@ export function Footer(props) {
             </Grid>
             <Grid
                 item component={"a"}
-                href={"https://twitter.com/shahroozsabet"}
+                href={"https://www.linkedin.com/in/shahroozsabet/"}
                 rel={"noopener noreferrer"}
                 target={"_blank"}
             >
-                <img alt={"Twitter Logo"} src={twitter}
+                <img alt={"Linkedin Logo"} src={linkedin}
                      className={classes.icon}
                 />
             </Grid>
