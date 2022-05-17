@@ -5,6 +5,7 @@ import {Button, Grid, makeStyles, Typography, useMediaQuery, useTheme} from "@ma
 import animationData from '../animations/landinganimation/data'
 import ButtonArrow from "./ui/ButtonArrow";
 import customSoftwareIcon from "../assets/Custom Software Icon.svg"
+import mobileAppIcon from "../assets/mobileIcon.svg"
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -93,10 +94,14 @@ export function LandingPage() {
                 </Grid>
             </Grid>
         </Grid>
-        <Grid item>{/*-----Service Block-----*/}
-            <Grid container direction={"row"}
-                  justifyContent={matchesSM ? "center" : undefined}
-                  className={classes.serviceContainer}
+        <Grid item>
+            {" "}
+            {/*-----Custom Software Block-----*/}
+            <Grid
+                container
+                direction={"row"}
+                justifyContent={matchesSM ? "center" : undefined}
+                className={classes.serviceContainer}
             >
                 <Grid item
                       style={{
@@ -122,7 +127,52 @@ export function LandingPage() {
                     </Button>
                 </Grid>
                 <Grid item>
-                    <img className={classes.icon} alt={"custom software icon"} src={customSoftwareIcon}/>
+                    <img
+                        className={classes.icon}
+                        alt={"custom software icon"}
+                        src={customSoftwareIcon}
+                    />
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid item>
+            {" "}
+            {/*-----Mobile Block-----*/}
+            <Grid
+                container
+                direction={"row"}
+                justifyContent={matchesSM ? "center" : "flex-end"}
+                className={classes.serviceContainer}
+            >
+                <Grid item
+                      style={{
+                          textAlign: matchesSM ? "center" : undefined
+                      }}>
+                    <Typography variant={"h4"}>
+                        Mobile App Development
+                    </Typography>
+                    <Typography variant={"subtitle1"} className={classes.subtitle}>
+                        Extend Functionality. Extend Access. Increase Engagement.
+                    </Typography>
+                    <Typography variant={"subtitle1"}>
+                        Integrate your web experience or create a standalone
+                        {matchesSM ? null : <br/>} cross platform app.
+                    </Typography>
+                    <Button variant={"outlined"} className={classes.learnButton}>
+                        <span style={{marginRight: 10}}>Learn More</span>
+                        <ButtonArrow
+                            width={10}
+                            height={10}
+                            fill={theme.palette.common.blue}
+                        />
+                    </Button>
+                </Grid>
+                <Grid item style={{marginRight: matchesSM ? 0 : "5em"}}>
+                    <img
+                        className={classes.icon}
+                        alt={"Mobile phone icon"}
+                        src={mobileAppIcon}
+                    />
                 </Grid>
             </Grid>
         </Grid>
