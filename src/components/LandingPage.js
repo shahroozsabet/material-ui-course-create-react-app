@@ -2,6 +2,8 @@ import React from "react";
 import Lottie from 'react-lottie'
 import {Button, Card, CardContent, Grid, makeStyles, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 
+import {CallToAction} from "./ui/CallToAction";
+
 import animationData from '../animations/landinganimation/data'
 import ButtonArrow from "./ui/ButtonArrow";
 import customSoftwareIcon from "../assets/Custom Software Icon.svg"
@@ -55,14 +57,16 @@ const useStyles = makeStyles(theme => ({
         marginTop: "12em", [theme.breakpoints.down("sm")]: {
             padding: 25
         }
-    }, revolutionBackground: {
+    },
+    revolutionBackground: {
         backgroundImage: `url(${revolutionBackground})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         height: "100%",
         width: "100%"
-    }, revolutionCard: {
+    },
+    revolutionCard: {
         position: "absolute",
         boxShadow: theme.shadows[10],
         borderRadius: 15,
@@ -369,6 +373,10 @@ export function LandingPage() {
                 </Grid>
                 <div className={classes.infoBackground}/>
             </Grid>
+        </Grid>
+        <Grid item>
+            {/*-----Call To Action Block-----*/}
+            <CallToAction/>
         </Grid>
     </Grid>)
 }
