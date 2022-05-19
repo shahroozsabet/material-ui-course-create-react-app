@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+
 import {Header} from "./ui/Header";
 import {ThemeProvider} from "@material-ui/core";
 import theme from "./ui/Theme";
@@ -17,7 +18,11 @@ function App() {
                     selectedIndex={selectedIndex}
                     setSelectedIndex={setSelectedIndex}/>
             <Switch>
-                <Route exact path={"/"} component={LandingPage}/>
+                <Route exact path={"/"} render={(props) => <LandingPage
+                    {...props}
+                    setValue={setValue}
+                    setSelectedIndex={setSelectedIndex}
+                />}/>
                 <Route exact path={"/services"} component={() => <div>Services</div>}/>
                 <Route exact path={"/customsoftware"} component={() => <div>Custom Software</div>}/>
                 <Route exact path={"/mobileapps"} component={() => <div>Mobile Apps</div>}/>
@@ -27,10 +32,10 @@ function App() {
                 <Route exact path={"/contact"} component={() => <div>Contact</div>}/>
                 <Route exact path={"/estimate"} component={() => <div>Estimate</div>}/>
             </Switch>
-            <Footer value={value}
-                    setValue={setValue}
-                    selectedIndex={selectedIndex}
-                    setSelectedIndex={setSelectedIndex}/>
+            <Footer
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+            />
         </BrowserRouter>
     </ThemeProvider>);
 }

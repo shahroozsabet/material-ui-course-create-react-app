@@ -4,6 +4,7 @@ import ButtonArrow from "./ButtonArrow";
 
 import background from '../../assets/longJon.jpg'
 import mobileBackground from '../../assets/longJonMobile.jpg'
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     learnButton: {
@@ -19,8 +20,7 @@ const useStyles = makeStyles(theme => ({
         height: "60em",
         width: "100%",
         [theme.breakpoints.down("md")]: {
-            backgroundImage: `url(${mobileBackground})`,
-            backgroundAttachment: "inherit"
+            backgroundImage: `url(${mobileBackground})`, backgroundAttachment: "inherit"
         }
     }, estimateButton: {
         ...theme.typography.estimate,
@@ -31,13 +31,16 @@ const useStyles = makeStyles(theme => ({
         fontSize: "1.5rem",
         marginRight: "5em",
         marginLeft: "2em",
+        "&:hover": {
+            backgroundColor: theme.palette.secondary.light
+        },
         [theme.breakpoints.down("sm")]: {
             marginLeft: 0, marginRight: 0
         }
     }
 }))
 
-export function CallToAction() {
+export function CallToAction(props) {
     const classes = useStyles();
     const theme = useTheme();
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
@@ -69,8 +72,11 @@ export function CallToAction() {
                         item
                     >
                         <Button
+                            component={Link}
+                            to={"/revolution"}
                             variant={"outlined"}
                             className={classes.learnButton}
+                            onClick={() => props.setValue(2)}
                         >
                             <span style={{marginRight: 5}}>Learn More</span>
                             <ButtonArrow
@@ -84,7 +90,13 @@ export function CallToAction() {
             </Grid>
         </Grid>
         <Grid item>
-            <Button variant={"contained"} className={classes.estimateButton}>
+            <Button
+                component={Link}
+                to={"/estimate"}
+                variant={"contained"}
+                className={classes.estimateButton}
+                onClick={() => props.setValue(5)}
+            >
                 Free Estimate
             </Button>
         </Grid>
