@@ -39,22 +39,22 @@ export function CustomSoftware(props) {
 
     const documentsOptions = {
         loop: true, autoplay: false, animationData: documentsAnimation, rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
+            preserveAspectRatio: "xMidYMid slice"
         }
     };
     const scaleOptions = {
         loop: true, autoplay: false, animationData: scaleAnimation, rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
+            preserveAspectRatio: "xMidYMid slice"
         }
     };
     const automationOptions = {
         loop: true, autoplay: false, animationData: automationAnimation, rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
+            preserveAspectRatio: "xMidYMid slice"
         }
     };
     const uxOptions = {
         loop: true, autoplay: false, animationData: uxAnimation, rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
+            preserveAspectRatio: "xMidYMid slice"
         }
     };
 

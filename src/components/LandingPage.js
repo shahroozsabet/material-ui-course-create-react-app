@@ -91,7 +91,7 @@ export function LandingPage(props) {
 
     const defaultOptions = {
         loop: true, autoplay: false, animationData: animationData, rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
+            preserveAspectRatio: "xMidYMid slice"
         }
     };
     return (<Grid container direction={"column"} className={classes.mainContainer}>
