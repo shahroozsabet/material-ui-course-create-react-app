@@ -138,7 +138,7 @@ export function LandingPage(props) {
                     </Grid>
                 </Grid>
                 <Grid sm item className={classes.animation}>
-                    <Lottie options={defaultOptions} height={"100%"} width={"100%"}/>
+                    <Lottie options={defaultOptions} height={"100%"} width={"100%"} isStopped={true}/>
                 </Grid>
             </Grid>
         </Grid>
