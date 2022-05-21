@@ -19,13 +19,16 @@ import {CallToAction} from "./ui/CallToAction";
 const useStyles = makeStyles(theme => ({
     heading: {
         maxWidth: "40em"
-    }, arrowContainer: {
+    },
+    arrowContainer: {
         marginTop: "0.5em"
-    }, rowContainer: {
+    },
+    rowContainer: {
         paddingLeft: "5em", paddingRight: "5em", [theme.breakpoints.down("sm")]: {
             paddingLeft: "1.5em", paddingRight: "1.5em"
         }
-    }, itemContainer: {
+    },
+    itemContainer: {
         maxWidth: "40em"
     }
 }))
