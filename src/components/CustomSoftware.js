@@ -14,7 +14,7 @@ import scaleAnimation from "../animations/scaleAnimation/data.json";
 import automationAnimation from "../animations/automationAnimation/data.json";
 import uxAnimation from "../animations/uxAnimation/data";
 
-import {CallToAction} from "./ui/CallToAction";
+import CallToAction from "./ui/CallToAction";
 
 const useStyles = makeStyles(theme => ({
     heading: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export function CustomSoftware(props) {
+export default function CustomSoftware(props) {
     const classes = useStyles()
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))

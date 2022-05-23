@@ -2,7 +2,7 @@ import React from "react";
 import Lottie from 'react-lottie'
 import {Button, Card, CardContent, Grid, makeStyles, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 
-import {CallToAction} from "./ui/CallToAction";
+import CallToAction from "./ui/CallToAction";
 
 import animationData from '../animations/landinganimation/data'
 import ButtonArrow from "./ui/ButtonArrow";
@@ -83,7 +83,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export function LandingPage(props) {
+export default function LandingPage(props) {
     const classes = useStyles();
     const theme = useTheme();
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));

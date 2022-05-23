@@ -10,7 +10,7 @@ import engagement from "../assets/increaseEngagement.svg";
 
 import integrationAnimation from '../animations/integrationAnimation/data.json'
 
-import {CallToAction} from "./ui/CallToAction";
+import CallToAction from "./ui/CallToAction";
 
 const useStyles = makeStyles(theme => ({
     heading: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export function MobileApps(props) {
+export default function MobileApps(props) {
     const classes = useStyles()
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))

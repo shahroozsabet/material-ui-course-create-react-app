@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export function CallToAction(props) {
+export default function CallToAction(props) {
     const classes = useStyles();
     const theme = useTheme();
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))

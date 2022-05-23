@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export function Services(props) {
+export default function Services(props) {
     const classes = useStyles()
     const theme = useTheme();
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));

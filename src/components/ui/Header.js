@@ -121,7 +121,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export function Header(props) {
+export default function Header(props) {
     const classes = useStyles();
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"))

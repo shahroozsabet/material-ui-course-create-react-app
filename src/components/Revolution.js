@@ -13,7 +13,7 @@ import maintain from "../assets/maintainIcon.svg";
 import iterate from "../assets/iterateIcon.svg";
 import technologyAnimation from "../animations/technologyAnimation/data.json";
 
-import {CallToAction} from "./ui/CallToAction";
+import CallToAction from "./ui/CallToAction";
 
 const useStyles = makeStyles(theme => ({
     rowContainer: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export function Revolution(props) {
+export default function Revolution(props) {
     const classes = useStyles()
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))

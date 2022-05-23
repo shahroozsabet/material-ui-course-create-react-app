@@ -8,7 +8,7 @@ import analytics from '../assets/analytics.svg'
 import seo from '../assets/seo.svg'
 import outreach from '../assets/outreach.svg'
 import ecommerce from '../assets/ecommerce.svg'
-import {CallToAction} from "./ui/CallToAction";
+import CallToAction from "./ui/CallToAction";
 
 const useStyles = makeStyles(theme => ({
     heading: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export function Websites(props) {
+export default function Websites(props) {
     const classes = useStyles()
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
