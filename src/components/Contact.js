@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import axios from "axios";
 import {
     Button,
     Dialog,
@@ -103,6 +104,12 @@ export default function Contact(props) {
                 break;
         }
     }
+
+    const onConfirm = () => {
+        axios.get('https://us-central1-shahroozdevelopment.cloudfunctions.net/sendMail')
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
+    };
 
     return (<Grid container direction={"row"}>
         <Grid
@@ -358,7 +365,7 @@ export default function Contact(props) {
                             disabled={name.length === 0 || message.length === 0 || phone.length === 0 || email.length === 0 || emailHelper.length !== 0}
                             variant={"contained"}
                             className={classes.sendButton}
-                            onClick={() => setOpen(true)}
+                            onClick={onConfirm}
                         >
                             Send Message
                             <img
