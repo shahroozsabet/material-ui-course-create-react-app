@@ -7,6 +7,7 @@ import {
     DialogContent,
     Grid,
     makeStyles,
+    Snackbar,
     TextField,
     Typography,
     useMediaQuery,
@@ -90,6 +91,8 @@ export default function Contact(props) {
 
     const [loading, setLoading] = useState(false);
 
+    const [alert, setAlerts] = useState({open: false, message: "", backgroundColor: ""});
+
     const onChange = event => {
         let valid;
         switch (event.target.id) {
@@ -115,14 +118,24 @@ export default function Contact(props) {
                 "https://us-central1-shahroozdevelopment.cloudfunctions.net/sendMail"
             )
             .then(res => {
-                // setLoading(false);
                 setOpen(false);
                 setName("");
                 setEmail("");
                 setPhone("");
                 setMessage("");
+                setAlerts({
+                    open: true,
+                    message: "Message sent successfully!",
+                    backgroundColor: "#4BB543"
+                })
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                setAlerts({
+                    open: true,
+                    message: "Something went wrong, please try again!",
+                    backgroundColor: "#FF3232"
+                })
+            })
             .finally(setLoading(false))
     };
 
@@ -394,6 +407,14 @@ export default function Contact(props) {
                 </Grid>
             </DialogContent>
         </Dialog>
+        <Snackbar
+            open={alert.open}
+            message={alert.message}
+            ContentProps={{style: {backgroundColor: alert.backgroundColor}}}
+            anchorOrigin={{vertical: "top", horizontal: "center"}}
+            onClose={() => setAlerts({...alert, open: false})}
+            autoHideDuration={4000}
+        />
         <Grid
             item
             container
