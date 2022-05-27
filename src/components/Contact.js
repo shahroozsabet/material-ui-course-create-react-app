@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import {
     Button,
+    CircularProgress,
     Dialog,
     DialogContent,
     Grid,
@@ -71,21 +72,23 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Contact(props) {
-    const classes = useStyles()
-    const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    const matchesXS = useMediaQuery(theme.breakpoints.down("xs"))
+    const classes = useStyles();
+    const theme = useTheme();
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+    const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
-    const [name, setName] = useState("")
+    const [name, setName] = useState("");
 
-    const [email, setEmail] = useState("")
-    const [emailHelper, setEmailHelper] = useState("")
+    const [email, setEmail] = useState("");
+    const [emailHelper, setEmailHelper] = useState("");
 
-    const [phone, setPhone] = useState("")
-    const [message, setMessage] = useState("")
+    const [phone, setPhone] = useState("");
+    const [message, setMessage] = useState("");
 
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+
+    const [loading, setLoading] = useState(false);
 
     const onChange = event => {
         let valid;
@@ -103,13 +106,36 @@ export default function Contact(props) {
             default:
                 break;
         }
-    }
+    };
 
     const onConfirm = () => {
-        axios.get('https://us-central1-shahroozdevelopment.cloudfunctions.net/sendMail')
-            .then(res => console.log(res))
+        setLoading(true)
+        axios
+            .get(
+                "https://us-central1-shahroozdevelopment.cloudfunctions.net/sendMail"
+            )
+            .then(res => {
+                // setLoading(false);
+                setOpen(false);
+                setName("");
+                setEmail("");
+                setPhone("");
+                setMessage("");
+            })
             .catch(err => console.error(err))
+            .finally(setLoading(false))
     };
+
+    const buttonContents = (
+        <React.Fragment>
+            Send Message
+            <img
+                src={airplane}
+                alt={"paper airplane"}
+                style={{marginLeft: "1em"}}
+            />
+        </React.Fragment>
+    )
 
     return (<Grid container direction={"row"}>
         <Grid
@@ -257,12 +283,7 @@ export default function Contact(props) {
                             className={classes.sendButton}
                             onClick={() => setOpen(true)}
                         >
-                            Send Message
-                            <img
-                                src={airplane}
-                                alt={"paper airplane"}
-                                style={{marginLeft: "1em"}}
-                            />
+                            {buttonContents}
                         </Button>
                     </Grid>
                 </Grid>
@@ -367,12 +388,7 @@ export default function Contact(props) {
                             className={classes.sendButton}
                             onClick={onConfirm}
                         >
-                            Send Message
-                            <img
-                                src={airplane}
-                                alt={"paper airplane"}
-                                style={{marginLeft: "1em"}}
-                            />
+                            {loading ? <CircularProgress size={30}/> : buttonContents}
                         </Button>
                     </Grid>
                 </Grid>
