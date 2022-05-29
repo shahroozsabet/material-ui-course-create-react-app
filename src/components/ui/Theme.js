@@ -24,6 +24,8 @@ export default createTheme({
             fontFamily: "Pacifico", fontSize: "2.5rem", color: arcBlue
         }, h4: {
             fontFamily: "Raleway", fontSize: "1.75rem", color: `${arcBlue}`, fontWeight: 700
+        }, h6: {
+            fontWeight: 500, fontFamily: "Raleway", color: arcBlue, lineHeight: 1
         }, subtitle1: {
             fontSize: "1.25rem", fontWeight: 300, color: arcGrey
         }, subtitle2: {
