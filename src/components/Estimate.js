@@ -13,8 +13,8 @@ import {
     useTheme
 } from "@material-ui/core";
 
-// import check from "../assets/check.svg";
-// import send from "../assets/send.svg";
+import check from "../assets/check.svg";
+import send from "../assets/send.svg";
 import software from "../assets/software.svg";
 import mobile from "../assets/mobile.svg";
 import website from "../assets/website.svg";
@@ -57,172 +57,272 @@ const useStyles = makeStyles(theme => ({
     },
     message: {
         border: `2px solid ${theme.palette.common.blue}`, marginTop: "5em", borderRadius: 5
+    },
+    specialText: {
+        fontFamily: "Raleway", fontWeight: 700, fontSize: "1.5rem", color: theme.palette.common.orange
     }
 }));
 
-const defaultQuestions = [{
-    id: 1, title: "Which service are you interested in?", active: true, options: [{
+const defaultQuestions = [
+    {
         id: 1,
-        title: "Custom Software Development",
-        subtitle: null,
-        icon: software,
-        iconAlt: "three floating screens",
-        selected: false,
-        cost: 0
-    }, {
-        id: 2,
-        title: "Mobile App Development",
-        subtitle: null,
-        icon: mobile,
-        iconAlt: "outlines of phones and tablets",
-        selected: false,
-        cost: 0
-    }, {
-        id: 3,
-        title: "Website Development",
-        subtitle: null,
-        icon: website,
-        iconAlt: "computer outline",
-        selected: false,
-        cost: 0
-    }]
-}];
+        title: "Which service are you interested in?",
+        active: true,
+        options: [
+            {
+                id: 1,
+                title: "Custom Software Development",
+                subtitle: null,
+                icon: software,
+                iconAlt: "three floating screens",
+                selected: false,
+                cost: 0
+            },
+            {
+                id: 2,
+                title: "Mobile App Development",
+                subtitle: null,
+                icon: mobile,
+                iconAlt: "outlines of phones and tablets",
+                selected: false,
+                cost: 0
+            },
+            {
+                id: 3,
+                title: "Website Development",
+                subtitle: null,
+                icon: website,
+                iconAlt: "computer outline",
+                selected: false,
+                cost: 0
+            }
+        ]
+    }
+];
 
-const softwareQuestions = [{...defaultQuestions[0], active: false}, {
-    id: 2, title: "Which platforms do you need supported?", subtitle: "Select all that apply.", options: [{
-        id: 1,
-        title: "Web Application",
-        subtitle: null,
-        icon: website,
-        iconAlt: "computer outline",
-        selected: false,
-        cost: 100
-    }, {
+const softwareQuestions = [
+    {
+        ...defaultQuestions[0],
+        active: false
+    },
+    {
         id: 2,
-        title: "iOS Application",
-        subtitle: null,
-        icon: iphone,
-        iconAlt: "outline of iphone",
-        selected: false,
-        cost: 100
-    }, {
+        title: "Which platforms do you need supported?",
+        subtitle: "Select all that apply.",
+        options: [
+            {
+                id: 1,
+                title: "Web Application",
+                subtitle: null,
+                icon: website,
+                iconAlt: "computer outline",
+                selected: false,
+                cost: 100
+            },
+            {
+                id: 2,
+                title: "iOS Application",
+                subtitle: null,
+                icon: iphone,
+                iconAlt: "outline of iphone",
+                selected: false,
+                cost: 100
+            },
+            {
+                id: 3,
+                title: "Android Application",
+                subtitle: null,
+                icon: android,
+                iconAlt: "outlines of android phone",
+                selected: false,
+                cost: 100
+            }
+        ],
+        active: true
+    },
+    {
         id: 3,
-        title: "Android Application",
-        subtitle: null,
-        icon: android,
-        iconAlt: "outlines of android phone",
-        selected: false,
-        cost: 100
-    }], active: true
-}, {
-    id: 3, title: "Which features do you expect to use?", subtitle: "Select all that apply.", options: [{
-        id: 1, title: "Photo/Video", subtitle: null, icon: camera, iconAlt: "camera outline", selected: false, cost: 25
-    }, {
-        id: 2, title: "GPS", subtitle: null, icon: gps, iconAlt: "gps pin", selected: false, cost: 25
-    }, {
-        id: 3,
-        title: "File Transfer",
-        subtitle: null,
-        icon: upload,
-        iconAlt: "outline of cloud with arrow pointing up",
-        selected: false,
-        cost: 25
-    }], active: false
-}, {
-    id: 4, title: "Which features do you expect to use?", subtitle: "Select all that apply.", options: [{
-        id: 1,
-        title: "Users/Authentication",
-        subtitle: null,
-        icon: users,
-        iconAlt: "outline of a person with a plus sign",
-        selected: false,
-        cost: 25
-    }, {
-        id: 2, title: "Biometrics", subtitle: null, icon: biometrics, iconAlt: "fingerprint", selected: false, cost: 25
-    }, {
-        id: 3,
-        title: "Push Notifications",
-        subtitle: null,
-        icon: bell,
-        iconAlt: "outline of a bell",
-        selected: false,
-        cost: 25
-    }], active: false
-}, {
-    id: 5, title: "What type of custom features do you expect to need?", subtitle: "Select one.", options: [{
-        id: 1,
-        title: "Low Complexity",
-        subtitle: "(Informational)",
-        icon: info,
-        iconAlt: "'i' inside a circle",
-        selected: false,
-        cost: 25
-    }, {
-        id: 2,
-        title: "Medium Complexity",
-        subtitle: "(Interactive, Customizable, Realtime)",
-        icon: customized,
-        iconAlt: "two toggle switches",
-        selected: false,
-        cost: 50
-    }, {
-        id: 3,
-        title: "High Complexity",
-        subtitle: "(Data Modeling and Computation)",
-        icon: data,
-        iconAlt: "outline of line graph",
-        selected: false,
-        cost: 100
-    }], active: false
-}, {
-    id: 6, title: "How many users do you expect?", subtitle: "Select one.", options: [{
-        id: 1, title: "0-10", subtitle: null, icon: person, iconAlt: "person outline", selected: false, cost: 1
-    }, {
-        id: 2,
-        title: "10-100",
-        subtitle: null,
-        icon: persons,
-        iconAlt: "outline of two people",
-        selected: false,
-        cost: 1.25
-    }, {
-        id: 3,
-        title: "100+",
-        subtitle: null,
-        icon: people,
-        iconAlt: "outline of three people",
-        selected: false,
-        cost: 1.5
-    }], active: false
-}];
+        title: "Which features do you expect to use?",
+        subtitle: "Select all that apply.",
+        options: [
+            {
+                id: 1,
+                title: "Photo/Video",
+                subtitle: null,
+                icon: camera,
+                iconAlt: "camera outline",
+                selected: false,
+                cost: 25
+            },
+            {
+                id: 2,
+                title: "GPS",
+                subtitle: null,
+                icon: gps,
+                iconAlt: "gps pin",
+                selected: false,
+                cost: 25
+            },
+            {
+                id: 3,
+                title: "File Transfer",
+                subtitle: null,
+                icon: upload,
+                iconAlt: "outline of cloud with arrow pointing up",
+                selected: false,
+                cost: 25
+            }
+        ],
+        active: false
+    },
+    {
+        id: 4,
+        title: "Which features do you expect to use?",
+        subtitle: "Select all that apply.",
+        options: [
+            {
+                id: 1,
+                title: "Users/Authentication",
+                subtitle: null,
+                icon: users,
+                iconAlt: "outline of a person with a plus sign",
+                selected: false,
+                cost: 25
+            },
+            {
+                id: 2,
+                title: "Biometrics",
+                subtitle: null,
+                icon: biometrics,
+                iconAlt: "fingerprint",
+                selected: false,
+                cost: 25
+            },
+            {
+                id: 3,
+                title: "Push Notifications",
+                subtitle: null,
+                icon: bell,
+                iconAlt: "outline of a bell",
+                selected: false,
+                cost: 25
+            }
+        ],
+        active: false
+    },
+    {
+        id: 5,
+        title: "What type of custom features do you expect to need?",
+        subtitle: "Select one.",
+        options: [
+            {
+                id: 1,
+                title: "Low Complexity",
+                subtitle: "(Informational)",
+                icon: info,
+                iconAlt: "'i' inside a circle",
+                selected: false,
+                cost: 25
+            },
+            {
+                id: 2,
+                title: "Medium Complexity",
+                subtitle: "(Interactive, Customizable, Realtime)",
+                icon: customized,
+                iconAlt: "two toggle switches",
+                selected: false,
+                cost: 50
+            },
+            {
+                id: 3,
+                title: "High Complexity",
+                subtitle: "(Data Modeling and Computation)",
+                icon: data,
+                iconAlt: "outline of line graph",
+                selected: false,
+                cost: 100
+            }
+        ],
+        active: false
+    },
+    {
+        id: 6,
+        title: "How many users do you expect?",
+        subtitle: "Select one.",
+        options: [
+            {
+                id: 1,
+                title: "0-10",
+                subtitle: null,
+                icon: person,
+                iconAlt: "person outline",
+                selected: false,
+                cost: 1
+            },
+            {
+                id: 2,
+                title: "10-100",
+                subtitle: null,
+                icon: persons,
+                iconAlt: "outline of two people",
+                selected: false,
+                cost: 1.25
+            },
+            {
+                id: 3,
+                title: "100+",
+                subtitle: null,
+                icon: people,
+                iconAlt: "outline of three people",
+                selected: false,
+                cost: 1.5
+            }
+        ],
+        active: false
+    }
+];
 
-const websiteQuestions = [{...defaultQuestions[0], active: false}, {
-    id: 2, title: "Which type of website are you wanting?", subtitle: "Select one.", options: [{
-        id: 1,
-        title: "Basic",
-        subtitle: "(Informational)",
-        icon: info,
-        iconAlt: "person outline",
-        selected: false,
-        cost: 100
-    }, {
+const websiteQuestions = [
+    {
+        ...defaultQuestions[0],
+        active: false
+    },
+    {
         id: 2,
-        title: "Interactive",
-        subtitle: "(Users, API's, Messaging)",
-        icon: customized,
-        iconAlt: "outline of two people",
-        selected: false,
-        cost: 200
-    }, {
-        id: 3,
-        title: "E-Commerce",
-        subtitle: "(Sales)",
-        icon: globe,
-        iconAlt: "outline of three people",
-        selected: false,
-        cost: 250
-    }], active: true
-}];
+        title: "Which type of website are you wanting?",
+        subtitle: "Select one.",
+        options: [
+            {
+                id: 1,
+                title: "Basic",
+                subtitle: "(Informational)",
+                icon: info,
+                iconAlt: "person outline",
+                selected: false,
+                cost: 100
+            },
+            {
+                id: 2,
+                title: "Interactive",
+                subtitle: "(Users, API's, Messaging)",
+                icon: customized,
+                iconAlt: "outline of two people",
+                selected: false,
+                cost: 200
+            },
+            {
+                id: 3,
+                title: "E-Commerce",
+                subtitle: "(Sales)",
+                icon: globe,
+                iconAlt: "outline of three people",
+                selected: false,
+                cost: 250
+            }
+        ],
+        active: true
+    }
+];
 
 export default function Estimate(props) {
     const classes = useStyles();
@@ -238,6 +338,14 @@ export default function Estimate(props) {
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
 
+    const [total, setTotal] = useState(0);
+    const [service, setService] = useState([]);
+    const [platforms, setPlatforms] = useState([]);
+    const [features, setFeatures] = useState([]);
+    const [customFeatures, setCustomFeatures] = useState("");
+    const [users, setUsers] = useState("");
+    const [category, setCategory] = useState("");
+
     const defaultOptions = {
         loop: true, autoplay: false, animationData: estimateAnimation, rendererSettings: {
             preserveAspectRatio: "xMidYMid slice"
@@ -246,6 +354,7 @@ export default function Estimate(props) {
 
     const nextQuestion = () => {
         const newQuestions = cloneDeep(questions);
+
         const currentlyActive = newQuestions.filter(question => question.active);
         const activeIndex = currentlyActive[0].id - 1;
         const nextIndex = activeIndex + 1;
@@ -258,6 +367,7 @@ export default function Estimate(props) {
 
     const previousQuestion = () => {
         const newQuestions = cloneDeep(questions);
+
         const currentlyActive = newQuestions.filter(question => question.active);
         const activeIndex = currentlyActive[0].id - 1;
         const nextIndex = activeIndex - 1;
@@ -270,8 +380,9 @@ export default function Estimate(props) {
 
     const navigationPreviousDisabled = () => {
         const currentlyActive = questions.filter(question => question.active);
+        const activeId = currentlyActive[0].id;
 
-        if (currentlyActive[0].id === 1) {
+        if (activeId === 1) {
             return true;
         } else {
             return false;
@@ -280,8 +391,9 @@ export default function Estimate(props) {
 
     const navigationNextDisabled = () => {
         const currentlyActive = questions.filter(question => question.active);
+        const activeId = currentlyActive[0].id;
 
-        if (currentlyActive[0].id === questions[questions.length - 1].id) {
+        if (activeId === questions[questions.length - 1].id) {
             return true;
         } else {
             return false;
@@ -290,32 +402,55 @@ export default function Estimate(props) {
 
     const handleSelect = (id) => {
         const newQuestions = cloneDeep(questions);
+
         const currentlyActive = newQuestions.filter(question => question.active);
         const activeIndex = currentlyActive[0].id - 1;
 
         const newSelected = newQuestions[activeIndex].options[id - 1];
-        const previousSelected = currentlyActive[0].options.filter(option => option.selected);
+
+        const previousSelected = currentlyActive[0].options.filter(
+            option => option.selected
+        );
 
         switch (currentlyActive[0].subtitle) {
-            case 'Select one.':
+            case "Select one.":
                 if (previousSelected[0]) {
                     previousSelected[0].selected = !previousSelected[0].selected;
                 }
+                newSelected.selected = !newSelected.selected;
                 break;
             default:
+                newSelected.selected = !newSelected.selected;
                 break;
         }
-        newSelected.selected = !newSelected.selected;
 
         switch (newSelected.title) {
-            case 'Custom Software Development':
+            case "Custom Software Development":
                 setQuestions(softwareQuestions);
+                setService(newSelected.title);
+                setPlatforms([]);
+                setFeatures([]);
+                setCustomFeatures("");
+                setUsers("");
+                setCategory("");
                 break;
-            case 'Mobile App Development':
+            case "Mobile App Development":
                 setQuestions(softwareQuestions);
+                setService(newSelected.title);
+                setPlatforms([]);
+                setFeatures([]);
+                setCustomFeatures("");
+                setUsers("");
+                setCategory("");
                 break;
-            case 'Website Development':
+            case "Website Development":
                 setQuestions(websiteQuestions);
+                setService(newSelected.title);
+                setPlatforms([]);
+                setFeatures([]);
+                setCustomFeatures("");
+                setUsers("");
+                setCategory("");
                 break;
             default:
                 setQuestions(newQuestions);
@@ -326,20 +461,230 @@ export default function Estimate(props) {
     const onChange = event => {
         let valid;
         switch (event.target.id) {
-            case 'email':
-                setEmail(event.target.value)
-                valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value)
+            case "email":
+                setEmail(event.target.value);
+                valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
+                    event.target.value
+                );
 
                 if (!valid) {
-                    setEmailHelper("Invalid email")
+                    setEmailHelper("Invalid email");
                 } else {
-                    setEmailHelper("")
+                    setEmailHelper("");
                 }
                 break;
             default:
                 break;
         }
     };
+
+    const getTotal = () => {
+        let cost = 0;
+
+        const selections = questions
+            .map(question => question.options.filter(option => option.selected))
+            .filter(question => question.length > 0);
+
+        selections.map(options => options.map(option => cost += option.cost));
+
+        if (questions.length > 2) {
+            const userCost = questions
+                .filter(question => question.title === "How many users do you expect?")
+                .map(question =>
+                    question.options.filter(option => option.selected)
+                )[0][0];
+
+            setUsers(userCost.title);
+
+            cost -= userCost.cost;
+            cost *= userCost.cost;
+        }
+
+        setTotal(cost);
+    };
+
+    const getPlatforms = () => {
+        if (questions.length > 2) {
+            let newPlatforms = [];
+
+            questions
+                .filter(
+                    question =>
+                        question.title === "Which platforms do you need supported?"
+                )
+                .map(question => question.options.filter(option => option.selected))[0]
+                .map(option => newPlatforms.push(option.title));
+
+            setPlatforms(newPlatforms);
+        }
+    };
+
+    const getFeatures = () => {
+        if (questions.length > 2) {
+            let newFeatures = [];
+
+            questions
+                .filter(
+                    question => question.title === "Which features do you expect to use?"
+                )
+                .map(question => question.options.filter(option => option.selected))
+                .map(option =>
+                    option.map(newFeature => newFeatures.push(newFeature.title))
+                );
+
+            setFeatures(newFeatures);
+        }
+    };
+
+    const getCustomFeatures = () => {
+        if (questions.length > 2) {
+            const newCustomFeatures = questions
+                .filter(
+                    question =>
+                        question.title ===
+                        "What type of custom features do you expect to need?"
+                )
+                .map(question =>
+                    question.options.filter(option => option.selected)
+                )[0][0].title;
+
+            setCustomFeatures(newCustomFeatures);
+        }
+    };
+
+    const getCategory = () => {
+        if (questions.length === 2) {
+            const newCategory = questions
+                .filter(
+                    question =>
+                        question.title === "Which type of website are you wanting?"
+                )[0]
+                .options.filter(option => option.selected)[0].title;
+
+            setCategory(newCategory);
+        }
+    };
+
+    const softwareSelection = (
+        <Grid container direction={"column"}>
+            <Grid
+                item
+                container
+                alignItems={"center"}
+            >
+                <Grid item>
+                    <img src={check} alt={"checkmark"}/>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"body1"}>
+                        {`You want ${service} `}
+                        {platforms.length > 0
+                            ? ` for ${
+                                //if only web application is selected...
+                                platforms.indexOf("Web Application") > -1 &&
+                                platforms.length === 1
+                                    ? //then finish sentence here
+                                    "a Web Application."
+                                    : //otherwise, if web application and another platform is selected...
+                                    platforms.indexOf("Web Application") > -1 &&
+                                    platforms.length === 2
+                                        ? //then finish the sentence here
+                                        `a Web Application and an ${platforms[1]}.`
+                                        : //otherwise, if only one platform is selected which isn't web application...
+                                        platforms.length === 1
+                                            ? //then finish the sentence here
+                                            `an ${platforms[0]}`
+                                            : //otherwise, if other two options are selected...
+                                            platforms.length === 2
+                                                ? //then finish the sentence here
+                                                "an iOS Application and an Android Application."
+                                                : //otherwise if all three are selected...
+                                                platforms.length === 3
+                                                    ? //then finish the sentence here
+                                                    "a Web Application, an iOS Application, and an Android Application."
+                                                    : null
+                            }`
+                            : null}
+                    </Typography>
+                </Grid>
+            </Grid>
+            <Grid
+                item
+                container
+                alignItems={"center"}
+            >
+                <Grid item>
+                    <img src={check} alt={"checkmark"}/>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"body1"}>
+                        {"with "}
+                        {/* if we have features... */}
+                        {features.length > 0
+                            ? //...and there's only 1...
+                            features.length === 1
+                                ? //then end the sentence here
+                                `${features[0]}.`
+                                : //otherwise, if there are two features...
+                                features.length === 2
+                                    ? //...then end the sentence here
+                                    `${features[0]} and ${features[1]}.`
+                                    : //otherwise, if there are three or more features...
+                                    features
+                                        //filter out the very last feature...
+                                        .filter(
+                                            (feature, index) =>
+                                                index !== features.length - 1
+                                        )
+                                        //and for those features return their name...
+                                        .map((feature, index) => (
+                                            <span key={index}>{`${feature}, `}</span>
+                                        ))
+                            : null}
+                        {features.length > 0 &&
+                        features.length !== 1 &&
+                        features.length !== 2
+                            ? //...and then finally add the last feature with 'and' in front of it
+                            ` and ${features[features.length - 1]}.`
+                            : null}
+                    </Typography>
+                </Grid>
+            </Grid>
+            <Grid item container alignItems={"center"}>
+                <Grid item>
+                    <img src={check} alt={"checkmark"}/>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"body1"}>
+                        The custom features will be of {customFeatures.toLowerCase()}
+                        {`, and the project will be used by about ${users}
+                                             users.`}
+                    </Typography>
+                </Grid>
+            </Grid>
+        </Grid>
+    );
+
+    const websiteSelection = (
+        <Grid container direction={"column"}>
+            <Grid
+                item
+                container
+                alignItems={"center"}
+            >
+                <Grid item>
+                    <img src={check} alt={"checkmark"}/>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"body1"}>
+                        You want {category === "Basic"
+                        ? "a Basic Website."
+                        : `an ${category} Website.`}
+                    </Typography>
+                </Grid>
+            </Grid>
+        </Grid>
+    );
 
     return (<Grid container direction={"row"}>
         <Grid
@@ -466,7 +811,14 @@ export default function Estimate(props) {
                 <Button
                     variant={"contained"}
                     className={classes.estimateButton}
-                    onClick={() => setDialogOpen(true)}
+                    onClick={() => {
+                        setDialogOpen(true);
+                        getTotal();
+                        getPlatforms();
+                        getFeatures();
+                        getCustomFeatures();
+                        getCategory();
+                    }}
                 >
                     Get Estimate
                 </Button>
@@ -482,7 +834,12 @@ export default function Estimate(props) {
             </Grid>
             <DialogContent>
                 <Grid container>
-                    <Grid item container direction={"column"}>
+                    <Grid
+                        item
+                        container
+                        direction={"column"}
+                        md={7}
+                    >
                         <Grid
                             item
                             style={{marginBottom: "0.5em"}}
@@ -521,31 +878,52 @@ export default function Estimate(props) {
                                 onChange={(event) => setPhone(event.target.value)}
                             />
                         </Grid>
+                        <Grid item style={{maxWidth: "20em"}}>
+                            <TextField
+                                InputProps={{disableUnderline: true}}
+                                value={message}
+                                className={classes.message}
+                                multiline
+                                fullWidth
+                                minRows={10}
+                                maxRows={10}
+                                id={"message"}
+                                onChange={(event) => setMessage(event.target.value)}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <Typography variant={"body1"} paragraph>
+                                We can create this digital solution for an estimated <span
+                                className={classes.specialText}>${total.toFixed(2)}</span>
+                            </Typography>
+                            <Typography variant={"body1"} paragraph>
+                                Fill out your name, phone number,
+                                and email, place your request,
+                                and we'll get back to you
+                                with details moving forward,
+                                and a final price.
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item style={{maxWidth: "20em"}}>
-                        <TextField
-                            InputProps={{disableUnderline: true}}
-                            value={message}
-                            className={classes.message}
-                            multiline
-                            fullWidth
-                            minRows={10}
-                            maxRows={10}
-                            id={"message"}
-                            onChange={(event) => setMessage(event.target.value)}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={"body1"} paragraph>
-                            We can create this digital solution for an estimated
-                        </Typography>
-                        <Typography variant={"body1"} paragraph>
-                            Fill out your name, phone number,
-                            and email, place your request,
-                            and we'll get back to you
-                            with details moving forward,
-                            and a final price.
-                        </Typography>
+                    <Grid
+                        item
+                        container
+                        direction={"column"}
+                        md={5}
+                    >
+                        <Grid item>
+                            {questions.length > 2 ? softwareSelection : websiteSelection}
+                        </Grid>
+                        <Grid item>
+                            <Button variant={"contained"} className={classes.estimateButton}>
+                                Place Request
+                                <img
+                                    src={send}
+                                    alt={"paper airplane"}
+                                    style={{marginLeft: "0.5em"}}
+                                />
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Grid>
             </DialogContent>
