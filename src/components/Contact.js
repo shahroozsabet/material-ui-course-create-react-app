@@ -160,7 +160,7 @@ export default function Contact(props) {
                 style={{marginLeft: "1em"}}
             />
         </React.Fragment>
-    )
+    );
 
     return (<Grid container direction={"row"}>
         <Grid
@@ -242,7 +242,7 @@ export default function Contact(props) {
                         item
                         container
                         direction={"column"}
-                        style={{maxWidth: "20em"}}
+                        style={{width: "20em"}}
                     >
                         <Grid
                             item
@@ -283,7 +283,7 @@ export default function Contact(props) {
                             />
                         </Grid>
                     </Grid>
-                    <Grid item style={{maxWidth: "20em"}}>
+                    <Grid item style={{width: "20em"}}>
                         <TextField
                             InputProps={{disableUnderline: true}}
                             value={message}
@@ -317,14 +317,14 @@ export default function Contact(props) {
         <Dialog
             style={{zIndex: 1302}}
             open={open}
-            fullScreen={matchesXS}
+            fullScreen={matchesSM}
             onClose={() => setOpen(false)}
             PaperProps={{
                 style: {
                     paddingTop: matchesXS ? "1em" : "5em",
                     paddingBottom: matchesXS ? "1em" : "5em",
-                    paddingLeft: matchesXS ? 0 : matchesSM ? "5em" : matchesMD ? "10em" : "20em",
-                    paddingRight: matchesXS ? 0 : matchesSM ? "5em" : matchesMD ? "10em" : "20em"
+                    paddingLeft: matchesXS ? 0 : matchesSM ? "5em" : matchesMD ? "15em" : "25em",
+                    paddingRight: matchesXS ? 0 : matchesSM ? "5em" : matchesMD ? "15em" : "25em"
                 }
             }}
         >
@@ -377,7 +377,7 @@ export default function Contact(props) {
                             onChange={(event) => setPhone(event.target.value)}
                         />
                     </Grid>
-                    <Grid item style={{maxWidth: matchesXS ? "100%" : "20em"}}>
+                    <Grid item style={{width: matchesSM ? "100%" : "20em"}}>
                         <TextField
                             InputProps={{disableUnderline: true}}
                             value={message}

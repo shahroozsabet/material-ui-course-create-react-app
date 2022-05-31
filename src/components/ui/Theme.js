@@ -15,7 +15,7 @@ export default createTheme({
         }
     }, typography: {
         tab: {
-            fontFamily: "Raleway", textTransform: "none", fontWeight: 700, fontSize: "1rem",
+            fontFamily: "Raleway", textTransform: "none", fontWeight: 700, color: "white", fontSize: "1rem",
         }, estimate: {
             fontFamily: "Pacifico", fontSize: "1rem", textTransform: "none", color: "white"
         }, h2: {
@@ -32,6 +32,8 @@ export default createTheme({
             color: "white", fontWeight: 300, fontSize: "1.25rem"
         }, body1: {
             fontSize: "1.25rem", color: arcGrey, fontWeight: 300
+        }, caption: {
+            fontSize: "1rem", fontWeight: 300, color: arcGrey
         }, learnButton: {
             borderColor: arcBlue,
             borderWidth: 2,

@@ -6,10 +6,12 @@ import {
     Dialog,
     DialogContent,
     Grid,
+    Hidden,
     IconButton,
     makeStyles,
     TextField,
     Typography,
+    useMediaQuery,
     useTheme
 } from "@material-ui/core";
 
@@ -41,7 +43,8 @@ import estimateAnimation from "../animations/estimateAnimation/data.json";
 
 const useStyles = makeStyles(theme => ({
     icon: {
-        width: "12em", height: "10em"
+        width: "12em",
+        height: "10em"
     },
     estimateButton: {
         ...theme.typography.estimate,
@@ -56,10 +59,16 @@ const useStyles = makeStyles(theme => ({
         }
     },
     message: {
-        border: `2px solid ${theme.palette.common.blue}`, marginTop: "5em", borderRadius: 5
+        border: `2px solid ${theme.palette.common.blue}`,
+        marginTop: "3em",
+        marginBottom: "2em",
+        borderRadius: 5
     },
     specialText: {
-        fontFamily: "Raleway", fontWeight: 700, fontSize: "1.5rem", color: theme.palette.common.orange
+        fontFamily: "Raleway",
+        fontWeight: 700,
+        fontSize: "2rem",
+        color: theme.palette.common.orange
     }
 }));
 
@@ -324,9 +333,11 @@ const websiteQuestions = [
     }
 ];
 
-export default function Estimate(props) {
+export default function Estimate() {
     const classes = useStyles();
     const theme = useTheme();
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
 
     const [questions, setQuestions] = useState(defaultQuestions);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -339,7 +350,7 @@ export default function Estimate(props) {
     const [message, setMessage] = useState("");
 
     const [total, setTotal] = useState(0);
-    const [service, setService] = useState([]);
+    const [service, setService] = useState("");
     const [platforms, setPlatforms] = useState([]);
     const [features, setFeatures] = useState([]);
     const [customFeatures, setCustomFeatures] = useState("");
@@ -347,7 +358,10 @@ export default function Estimate(props) {
     const [category, setCategory] = useState("");
 
     const defaultOptions = {
-        loop: true, autoplay: false, animationData: estimateAnimation, rendererSettings: {
+        loop: true,
+        autoplay: false,
+        animationData: estimateAnimation,
+        rendererSettings: {
             preserveAspectRatio: "xMidYMid slice"
         }
     };
@@ -460,6 +474,7 @@ export default function Estimate(props) {
 
     const onChange = event => {
         let valid;
+
         switch (event.target.id) {
             case "email":
                 setEmail(event.target.value);
@@ -571,11 +586,12 @@ export default function Estimate(props) {
                 item
                 container
                 alignItems={"center"}
+                style={{marginBottom: "1.25em"}}
             >
-                <Grid item>
+                <Grid item xs={2}>
                     <img src={check} alt={"checkmark"}/>
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <Typography variant={"body1"}>
                         {`You want ${service} `}
                         {platforms.length > 0
@@ -612,11 +628,12 @@ export default function Estimate(props) {
                 item
                 container
                 alignItems={"center"}
+                style={{marginBottom: "1.25em"}}
             >
-                <Grid item>
+                <Grid item xs={2}>
                     <img src={check} alt={"checkmark"}/>
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <Typography variant={"body1"}>
                         {"with "}
                         {/* if we have features... */}
@@ -650,11 +667,15 @@ export default function Estimate(props) {
                     </Typography>
                 </Grid>
             </Grid>
-            <Grid item container alignItems={"center"}>
-                <Grid item>
+            <Grid
+                item
+                container
+                alignItems={"center"}
+            >
+                <Grid item xs={2}>
                     <img src={check} alt={"checkmark"}/>
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <Typography variant={"body1"}>
                         The custom features will be of {customFeatures.toLowerCase()}
                         {`, and the project will be used by about ${users}
@@ -666,16 +687,20 @@ export default function Estimate(props) {
     );
 
     const websiteSelection = (
-        <Grid container direction={"column"}>
+        <Grid
+            container
+            direction={"column"}
+            style={{marginTop: "14em"}}
+        >
             <Grid
                 item
                 container
                 alignItems={"center"}
             >
-                <Grid item>
+                <Grid item xs={2}>
                     <img src={check} alt={"checkmark"}/>
                 </Grid>
-                <Grid item>
+                <Grid item xs={10}>
                     <Typography variant={"body1"}>
                         You want {category === "Basic"
                         ? "a Basic Website."
@@ -692,19 +717,28 @@ export default function Estimate(props) {
             container
             direction={"column"}
             lg
+            alignItems={matchesMD ? "center" : undefined}
         >
             <Grid
                 item
-                style={{marginTop: "2em", marginLeft: "5em"}}
+                style={{
+                    marginTop: "2em",
+                    marginLeft: matchesMD ? 0 : "5em"
+                }}
             >
-                <Typography variant={"h2"}>
+                <Typography
+                    variant={"h2"}
+                    align={matchesMD ? "center" : undefined}
+                >
                     Estimate
                 </Typography>
             </Grid>
             <Grid
                 item
                 style={{
-                    marginRight: "10em", maxWidth: "50em", marginTop: "7.5em"
+                    marginRight: matchesMD ? 0 : "10em",
+                    maxWidth: "50em",
+                    marginTop: "7.5em"
                 }}
             >
                 <Lottie
@@ -721,7 +755,10 @@ export default function Estimate(props) {
             direction={"column"}
             alignItems={"center"}
             lg
-            style={{marginRight: "2em", marginBottom: "25em"}}
+            style={{
+                marginRight: matchesMD ? 0 : "2em",
+                marginBottom: "25em"
+            }}
         >
             {questions
                 .filter(question => question.active)
@@ -731,7 +768,12 @@ export default function Estimate(props) {
                             align={"center"}
                             variant={"h2"}
                             style={{
-                                fontWeight: 500, fontSize: "2.25rem", marginTop: "5em", lineHeight: 1.25
+                                fontWeight: 500,
+                                fontSize: "2.25rem",
+                                marginTop: "5em",
+                                lineHeight: 1.25,
+                                marginLeft: matchesSM ? "1em" : 0,
+                                marginRight: matchesSM ? "1em" : 0
                             }}
                         >
                             {question.title}
@@ -755,9 +797,11 @@ export default function Estimate(props) {
                                 display: "grid",
                                 textTransform: "none",
                                 borderRadius: 0,
+                                marginBottom: matchesSM ? "1.5em" : 0,
                                 backgroundColor: option.selected ? theme.palette.common.orange : undefined
                             }}
                             direction={"column"}
+                            alignItems="center"
                             md
                         >
                             <Grid item style={{maxWidth: "14em"}}>
@@ -765,7 +809,8 @@ export default function Estimate(props) {
                                     align={"center"}
                                     variant={"h6"}
                                     style={{
-                                        lineHeight: 1, marginBottom: "1em"
+                                        lineHeight: 1,
+                                        marginBottom: "1em"
                                     }}
                                 >
                                     {option.title}
@@ -824,21 +869,39 @@ export default function Estimate(props) {
                 </Button>
             </Grid>
         </Grid>
-        <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+        <Dialog
+            open={dialogOpen}
+            onClose={() => setDialogOpen(false)}
+            fullWidth
+            maxWidth={"lg"}
+            style={{zIndex: 1302}}
+            fullScreen={matchesSM}
+        >
             <Grid container justifyContent={"center"}>
-                <Grid item>
+                <Grid
+                    item
+                    style={{
+                        marginTop: "1em"
+                    }}
+                >
                     <Typography variant={"h2"} align={"center"}>
                         Estimate
                     </Typography>
                 </Grid>
             </Grid>
             <DialogContent>
-                <Grid container>
+                <Grid
+                    container
+                    justifyContent={"space-around"}
+                    direction={matchesSM ? "column" : "row"}
+                    alignItems={matchesSM ? "center" : undefined}
+                >
                     <Grid
                         item
                         container
                         direction={"column"}
                         md={7}
+                        style={{maxWidth: "20em"}}
                     >
                         <Grid
                             item
@@ -878,13 +941,14 @@ export default function Estimate(props) {
                                 onChange={(event) => setPhone(event.target.value)}
                             />
                         </Grid>
-                        <Grid item style={{maxWidth: "20em"}}>
+                        <Grid item>
                             <TextField
                                 InputProps={{disableUnderline: true}}
                                 value={message}
                                 className={classes.message}
                                 multiline
                                 fullWidth
+                                placeholder="Tell us more about your project."
                                 minRows={10}
                                 maxRows={10}
                                 id={"message"}
@@ -892,12 +956,23 @@ export default function Estimate(props) {
                             />
                         </Grid>
                         <Grid item>
-                            <Typography variant={"body1"} paragraph>
-                                We can create this digital solution for an estimated <span
-                                className={classes.specialText}>${total.toFixed(2)}</span>
+                            <Typography
+                                variant={"body1"}
+                                paragraph
+                                align={matchesSM ? "center" : undefined}
+                                style={{lineHeight: 1.1}}
+                            >
+                                We can create this digital solution for an estimated{" "}
+                                <span className={classes.specialText}>
+                                    ${total.toFixed(2)}
+                                </span>
                             </Typography>
-                            <Typography variant={"body1"} paragraph>
-                                Fill out your name, phone number,
+                            <Typography
+                                variant={"body1"}
+                                paragraph
+                                align={matchesSM ? "center" : undefined}
+                            >
+                                Fill out your name, number,
                                 and email, place your request,
                                 and we'll get back to you
                                 with details moving forward,
@@ -910,10 +985,14 @@ export default function Estimate(props) {
                         container
                         direction={"column"}
                         md={5}
+                        style={{maxWidth: "30em"}}
+                        alignItems={matchesSM ? "center" : undefined}
                     >
-                        <Grid item>
-                            {questions.length > 2 ? softwareSelection : websiteSelection}
-                        </Grid>
+                        <Hidden smDown>
+                            <Grid item>
+                                {questions.length > 2 ? softwareSelection : websiteSelection}
+                            </Grid>
+                        </Hidden>
                         <Grid item>
                             <Button variant={"contained"} className={classes.estimateButton}>
                                 Place Request
@@ -924,6 +1003,17 @@ export default function Estimate(props) {
                                 />
                             </Button>
                         </Grid>
+                        <Hidden mdUp>
+                            <Grid item style={{marginBottom: matchesSM ? "5em" : 0}}>
+                                <Button
+                                    style={{fontWeight: 300}}
+                                    color={"primary"}
+                                    onClick={() => setDialogOpen(false)}
+                                >
+                                    Cancel
+                                </Button>
+                            </Grid>
+                        </Hidden>
                     </Grid>
                 </Grid>
             </DialogContent>
