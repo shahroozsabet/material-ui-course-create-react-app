@@ -1,7 +1,17 @@
 import React, {useState} from "react";
 import {cloneDeep} from "lodash";
 import Lottie from "react-lottie";
-import {Button, Grid, IconButton, makeStyles, Typography, useTheme} from "@material-ui/core";
+import {
+    Button,
+    Dialog,
+    DialogContent,
+    Grid,
+    IconButton,
+    makeStyles,
+    TextField,
+    Typography,
+    useTheme
+} from "@material-ui/core";
 
 // import check from "../assets/check.svg";
 // import send from "../assets/send.svg";
@@ -32,7 +42,8 @@ import estimateAnimation from "../animations/estimateAnimation/data.json";
 const useStyles = makeStyles(theme => ({
     icon: {
         width: "12em", height: "10em"
-    }, estimateButton: {
+    },
+    estimateButton: {
         ...theme.typography.estimate,
         borderRadius: 50,
         backgroundColor: theme.palette.common.orange,
@@ -43,6 +54,9 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
             backgroundColor: theme.palette.secondary.light
         }
+    },
+    message: {
+        border: `2px solid ${theme.palette.common.blue}`, marginTop: "5em", borderRadius: 5
     }
 }));
 
@@ -215,6 +229,14 @@ export default function Estimate(props) {
     const theme = useTheme();
 
     const [questions, setQuestions] = useState(defaultQuestions);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [name, setName] = useState("");
+
+    const [email, setEmail] = useState("");
+    const [emailHelper, setEmailHelper] = useState("");
+
+    const [phone, setPhone] = useState("");
+    const [message, setMessage] = useState("");
 
     const defaultOptions = {
         loop: true, autoplay: false, animationData: estimateAnimation, rendererSettings: {
@@ -297,6 +319,24 @@ export default function Estimate(props) {
                 break;
             default:
                 setQuestions(newQuestions);
+                break;
+        }
+    };
+
+    const onChange = event => {
+        let valid;
+        switch (event.target.id) {
+            case 'email':
+                setEmail(event.target.value)
+                valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value)
+
+                if (!valid) {
+                    setEmailHelper("Invalid email")
+                } else {
+                    setEmailHelper("")
+                }
+                break;
+            default:
                 break;
         }
     };
@@ -423,10 +463,92 @@ export default function Estimate(props) {
                 </Grid>
             </Grid>
             <Grid item>
-                <Button variant={"contained"} className={classes.estimateButton}>
+                <Button
+                    variant={"contained"}
+                    className={classes.estimateButton}
+                    onClick={() => setDialogOpen(true)}
+                >
                     Get Estimate
                 </Button>
             </Grid>
         </Grid>
+        <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+            <Grid container justifyContent={"center"}>
+                <Grid item>
+                    <Typography variant={"h2"} align={"center"}>
+                        Estimate
+                    </Typography>
+                </Grid>
+            </Grid>
+            <DialogContent>
+                <Grid container>
+                    <Grid item container direction={"column"}>
+                        <Grid
+                            item
+                            style={{marginBottom: "0.5em"}}
+                        >
+                            <TextField
+                                label={"Name"}
+                                id={"name"}
+                                fullWidth
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            style={{marginBottom: "0.5em"}}
+                        >
+                            <TextField
+                                label={"Email"}
+                                error={emailHelper.length !== 0}
+                                helperText={emailHelper}
+                                id={"email"}
+                                fullWidth
+                                value={email}
+                                onChange={onChange}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            style={{marginBottom: "0.5em"}}
+                        >
+                            <TextField
+                                label={"Phone"}
+                                id={"phone"}
+                                fullWidth
+                                value={phone}
+                                onChange={(event) => setPhone(event.target.value)}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid item style={{maxWidth: "20em"}}>
+                        <TextField
+                            InputProps={{disableUnderline: true}}
+                            value={message}
+                            className={classes.message}
+                            multiline
+                            fullWidth
+                            minRows={10}
+                            maxRows={10}
+                            id={"message"}
+                            onChange={(event) => setMessage(event.target.value)}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={"body1"} paragraph>
+                            We can create this digital solution for an estimated
+                        </Typography>
+                        <Typography variant={"body1"} paragraph>
+                            Fill out your name, phone number,
+                            and email, place your request,
+                            and we'll get back to you
+                            with details moving forward,
+                            and a final price.
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </DialogContent>
+        </Dialog>
     </Grid>)
 }

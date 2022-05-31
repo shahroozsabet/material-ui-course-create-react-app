@@ -34,7 +34,8 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("md")]: {
             backgroundImage: `url(${mobileBackground})`
         }
-    }, estimateButton: {
+    },
+    estimateButton: {
         ...theme.typography.estimate,
         borderRadius: 50,
         height: 80,
@@ -49,13 +50,16 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("md")]: {
             marginLeft: 0, marginRight: 0
         }
-    }, learnButton: {
+    },
+    learnButton: {
         ...theme.typography.learnButton, fontSize: "0.7rem", height: 35, padding: 5, [theme.breakpoints.down("md")]: {
             marginBottom: "2em"
         }
-    }, message: {
+    },
+    message: {
         border: `2px solid ${theme.palette.common.blue}`, marginTop: "5em", borderRadius: 5
-    }, sendButton: {
+    },
+    sendButton: {
         ...theme.typography.estimate,
         borderRadius: 50,
         height: 45,
