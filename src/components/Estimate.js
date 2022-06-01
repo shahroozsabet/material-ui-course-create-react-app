@@ -3,12 +3,14 @@ import {cloneDeep} from "lodash";
 import Lottie from "react-lottie";
 import {
     Button,
+    CircularProgress,
     Dialog,
     DialogContent,
     Grid,
     Hidden,
     IconButton,
     makeStyles,
+    Snackbar,
     TextField,
     Typography,
     useMediaQuery,
@@ -40,6 +42,7 @@ import android from "../assets/android.svg";
 import globe from "../assets/globe.svg";
 import biometrics from "../assets/biometrics.svg";
 import estimateAnimation from "../animations/estimateAnimation/data.json";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -357,6 +360,10 @@ export default function Estimate() {
     const [users, setUsers] = useState("");
     const [category, setCategory] = useState("");
 
+    const [alert, setAlerts] = useState({open: false, message: "", backgroundColor: ""});
+
+    const [loading, setLoading] = useState(false);
+
     const defaultOptions = {
         loop: true,
         autoplay: false,
@@ -578,6 +585,66 @@ export default function Estimate() {
 
             setCategory(newCategory);
         }
+    };
+
+    const sendEstimate = () => {
+        setLoading(true);
+
+        axios
+            .get(
+                "https://us-central1-shahroozdevelopment.cloudfunctions.net/sendMail",
+                {
+                    params: {
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        message: message,
+                        total: total,
+                        category: category,
+                        service: service,
+                        features: features,
+                        customFeatures: customFeatures,
+                        users: users
+                    }
+                }
+            )
+            .then(res => {
+                setAlerts({
+                    open: true,
+                    message: "Estimate placed successfully!",
+                    backgroundColor: "#4BB543"
+                });
+                setDialogOpen(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setAlerts({
+                    open: true,
+                    message: "Something went wrong, please try again!",
+                    backgroundColor: "#FF3232"
+                });
+            })
+            .finally(setLoading(false));
+
+    };
+
+    const estimateDisabled = () => {
+        const emptySelections = questions.map(question =>
+            question.options.filter(option => option.selected))
+            .filter(question => question.length === 0);
+
+        if (questions.length === 2) {
+            if (emptySelections.length === 1) {
+                return false;
+            }
+        } else if (questions.length === 1) {
+            return true;
+        } else if (emptySelections.length < 3 &&
+            questions[questions.length - 1].options
+                .filter(option => option.selected).length > 0) {
+            return false;
+        }
+        return true;
     };
 
     const softwareSelection = (
@@ -856,6 +923,7 @@ export default function Estimate() {
                 <Button
                     variant={"contained"}
                     className={classes.estimateButton}
+                    disabled={estimateDisabled()}
                     onClick={() => {
                         setDialogOpen(true);
                         getTotal();
@@ -994,13 +1062,21 @@ export default function Estimate() {
                             </Grid>
                         </Hidden>
                         <Grid item>
-                            <Button variant={"contained"} className={classes.estimateButton}>
-                                Place Request
-                                <img
-                                    src={send}
-                                    alt={"paper airplane"}
-                                    style={{marginLeft: "0.5em"}}
-                                />
+                            <Button
+                                variant={"contained"}
+                                className={classes.estimateButton}
+                                onClick={sendEstimate}
+                            >
+                                {loading ? <CircularProgress/> :
+                                    <React.Fragment>
+                                        Place Request
+                                        <img
+                                            src={send}
+                                            alt={"paper airplane"}
+                                            style={{marginLeft: "0.5em"}}
+                                        />
+                                    </React.Fragment>
+                                }
                             </Button>
                         </Grid>
                         <Hidden mdUp>
@@ -1018,5 +1094,13 @@ export default function Estimate() {
                 </Grid>
             </DialogContent>
         </Dialog>
+        <Snackbar
+            open={alert.open}
+            message={alert.message}
+            ContentProps={{style: {backgroundColor: alert.backgroundColor}}}
+            anchorOrigin={{vertical: "top", horizontal: "center"}}
+            onClose={() => setAlerts({...alert, open: false})}
+            autoHideDuration={4000}
+        />
     </Grid>)
 }

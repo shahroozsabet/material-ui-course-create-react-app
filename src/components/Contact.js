@@ -116,7 +116,7 @@ export default function Contact(props) {
     };
 
     const onConfirm = () => {
-        setLoading(true)
+        setLoading(true);
         axios
             .get(
                 "https://us-central1-shahroozdevelopment.cloudfunctions.net/sendMail",
@@ -139,16 +139,16 @@ export default function Contact(props) {
                     open: true,
                     message: "Message sent successfully!",
                     backgroundColor: "#4BB543"
-                })
+                });
             })
             .catch(err => {
                 setAlerts({
                     open: true,
                     message: "Something went wrong, please try again!",
                     backgroundColor: "#FF3232"
-                })
+                });
             })
-            .finally(setLoading(false))
+            .finally(setLoading(false));
     };
 
     const buttonContents = (
