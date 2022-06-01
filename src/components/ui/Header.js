@@ -17,9 +17,10 @@ import {
     useTheme
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
-import logo from "../../assets/logo.svg"
 import {Link} from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+
+import logo from "../../assets/logo.svg";
 
 function ElevationScroll(props) {
     const {children} = props;
@@ -63,12 +64,12 @@ const useStyles = makeStyles(theme => ({
     tabContainer: {
         marginLeft: "auto"
     },
-    Tab: {
+    tab: {
         ...theme.typography.tab,
         minWidth: 10,
         marginLeft: "25px"
     },
-    Button: {
+    button: {
         ...theme.typography.estimate,
         borderRadius: "50px",
         marginLeft: "50px",
@@ -124,10 +125,10 @@ const useStyles = makeStyles(theme => ({
 export default function Header(props) {
     const classes = useStyles();
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.down("md"))
+    const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    const [openDrawer, setOpenDrawer] = useState(false)
-    const [anchorEL, setAnchorEl] = useState(null);
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
     const [openMenu, setOpenMenu] = useState(false);
 
     const handleChange = (e, newValue) => {
@@ -135,20 +136,20 @@ export default function Header(props) {
     };
 
     const handleClick = (e) => {
-        setAnchorEl(e.currentTarget)
-        setOpenMenu(true)
-    }
+        setAnchorEl(e.currentTarget);
+        setOpenMenu(true);
+    };
 
     function handleMenuItemClick(i) {
-        setAnchorEl(null)
-        setOpenMenu(false)
-        props.setSelectedIndex(i)
+        setAnchorEl(null);
+        setOpenMenu(false);
+        props.setSelectedIndex(i);
     }
 
     const handleClose = () => {
-        setAnchorEl(null)
-        setOpenMenu(false)
-    }
+        setAnchorEl(null);
+        setOpenMenu(false);
+    };
 
     let menuOptions = [
         {name: "Services", link: "/services", activeIndex: 1, selectedIndex: 0},
@@ -170,7 +171,7 @@ export default function Header(props) {
             activeIndex: 1,
             selectedIndex: 3
         }
-    ]
+    ];
 
     const routes = [
         {name: "Home", link: "/", activeIndex: 0},
@@ -178,39 +179,37 @@ export default function Header(props) {
             name: "Services",
             link: "/services",
             activeIndex: 1,
-            ariaOwns: anchorEL ? "simple-menu" : undefined,
-            ariaPopup: anchorEL ? "true" : undefined,
+            ariaOwns: anchorEl ? "simple-menu" : undefined,
+            ariaPopup: anchorEl ? "true" : undefined,
             mouseOver: event => handleClick(event)
         },
         {name: "The Revolution", link: "/revolution", activeIndex: 2},
         {name: "About Us", link: "/about", activeIndex: 3},
         {name: "Contact Us", link: "/contact", activeIndex: 4}
-    ]
+    ];
 
     useEffect(() => {
         [...menuOptions, ...routes].forEach(route => {
             switch (window.location.pathname) {
                 case `${route.link}`:
                     if (props.value !== route.activeIndex) {
-                        props.setValue(route.activeIndex)
+                        props.setValue(route.activeIndex);
                         if (
                             route.selectedIndex &&
                             route.selectedIndex !== props.selectedIndex
                         ) {
-                            props.setSelectedIndex(route.selectedIndex)
+                            props.setSelectedIndex(route.selectedIndex);
                         }
                     }
                     break;
-                case '/estimate':
-                    if (props.value !== false) {
-                        props.setValue(false);
-                    }
+                case "/estimate":
+                    props.setValue(5);
                     break;
                 default:
                     break;
             }
-        })
-    }, [props.value, menuOptions, props.selectedIndex, routes, props])
+        });
+    }, [props.value, menuOptions, props.selectedIndex, routes, props]);
 
     const tabs = (
         <React.Fragment>
@@ -223,7 +222,7 @@ export default function Header(props) {
                 {routes.map((route, index) => (
                     <Tab
                         key={`${route}${index}`}
-                        className={classes.Tab}
+                        className={classes.tab}
                         component={Link}
                         to={route.link}
                         label={route.name}
@@ -238,16 +237,16 @@ export default function Header(props) {
                 to={"/estimate"}
                 variant={"contained"}
                 color={"secondary"}
-                className={classes.Button}
+                className={classes.button}
                 onClick={() => {
-                    props.setValue(false);
+                    props.setValue(5);
                 }}
             >
                 Free Estimate
             </Button>
             <Menu
                 id={"simple-menu"}
-                anchorEl={anchorEL}
+                anchorEl={anchorEl}
                 open={openMenu}
                 onClose={handleClose}
                 classes={{paper: classes.menu}}
@@ -265,8 +264,8 @@ export default function Header(props) {
                         to={option.link}
                         classes={{root: classes.menuItem}}
                         onClick={() => {
-                            handleMenuItemClick(i)
-                            props.setValue(1)
+                            handleMenuItemClick(i);
+                            props.setValue(1);
                             handleClose();
                         }}
                         selected={i === props.selectedIndex && props.value === 1}
@@ -276,7 +275,7 @@ export default function Header(props) {
                 ))}
             </Menu>
         </React.Fragment>
-    )
+    );
 
     const drawer = (
         <React.Fragment>
@@ -299,7 +298,7 @@ export default function Header(props) {
                             classes={{selected: classes.drawerItemSelected}}
                             onClick={() => {
                                 setOpenDrawer(false);
-                                props.setValue(route.activeIndex)
+                                props.setValue(route.activeIndex);
                             }}
                         >
                             <ListItemText className={classes.drawerItem} disableTypography>
@@ -310,7 +309,7 @@ export default function Header(props) {
                     <ListItem
                         onClick={() => {
                             setOpenDrawer(false);
-                            props.setValue(5)
+                            props.setValue(5);
                         }}
                         divider
                         button
@@ -320,7 +319,7 @@ export default function Header(props) {
                             selected: classes.drawerItemSelected
                         }}
                         to={"/estimate"}
-                        selected={props.value === false}
+                        selected={props.value === 5}
                     >
                         <ListItemText className={classes.drawerItem} disableTypography>
                             Free Estimate
@@ -336,7 +335,7 @@ export default function Header(props) {
                 <MenuIcon className={classes.drawerIcon}/>
             </IconButton>
         </React.Fragment>
-    )
+    );
 
     return (
         <React.Fragment>

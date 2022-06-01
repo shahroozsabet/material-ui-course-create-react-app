@@ -855,7 +855,7 @@ export default function Estimate() {
                         </Typography>
                     </Grid>
                     <Grid item container>
-                        {question.options.map(option => (<Grid
+                        {question.options.map((option, index) => (<Grid
                             item
                             container
                             component={Button}
@@ -870,6 +870,7 @@ export default function Estimate() {
                             direction={"column"}
                             alignItems="center"
                             md
+                            key={index}
                         >
                             <Grid item style={{maxWidth: "14em"}}>
                                 <Typography
@@ -1066,6 +1067,7 @@ export default function Estimate() {
                                 variant={"contained"}
                                 className={classes.estimateButton}
                                 onClick={sendEstimate}
+                                disabled={name.length === 0 || message.length === 0 || phone.length === 0 || email.length === 0 || emailHelper.length !== 0}
                             >
                                 {loading ? <CircularProgress/> :
                                     <React.Fragment>
