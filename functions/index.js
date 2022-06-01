@@ -61,7 +61,7 @@ exports.sendMail = functions.https.onRequest((request, response) => {
         if (error) {
           response.send(error);
         } else {
-          response.send("Message send successfully");
+          response.send("Message sent successfully");
         }
       });
 
@@ -675,7 +675,7 @@ class="social_icon"
         if (error) {
           response.send(error);
         } else {
-          response.send("Message send successfully");
+          response.send("Message sent successfully");
         }
       });
 
