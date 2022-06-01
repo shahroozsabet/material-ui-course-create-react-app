@@ -7,19 +7,31 @@ const cors = require("cors")({origin: true});
 admin.initializeApp();
 
 const transporter = nodemailer.createTransport({
-  service: "gmail", auth: {
-    user: config.user.email, pass: config.user.password,
+  service: "gmail",
+  auth: {
+    user: config.user.email,
+    pass: config.user.password,
   },
 });
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
-exports.sendMail = functions.https.onRequest((request, response) => {
-  cors(request, response, () => {
-    const {name, email, phone, message,
-      total, service, platforms, features,
-      customFeatures, users, category} = request.query;
+exports.sendMail = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    const {
+      name,
+      email,
+      phone,
+      message,
+      total,
+      service,
+      platforms,
+      features,
+      customFeatures,
+      users,
+      category,
+    } = req.query;
     let mailOptions;
     if (total) {
       if (category) {
@@ -59,9 +71,9 @@ exports.sendMail = functions.https.onRequest((request, response) => {
 
       transporter.sendMail(mailOptions, (error) => {
         if (error) {
-          response.send(error);
+          res.send(error);
         } else {
-          response.send("Message sent successfully");
+          res.send("Message sent successfully.");
         }
       });
 
@@ -673,9 +685,9 @@ class="social_icon"
 
       transporter.sendMail(mailOptions, (error) => {
         if (error) {
-          response.send(error);
+          res.send(error);
         } else {
-          response.send("Message sent successfully");
+          res.send("Message sent successfully");
         }
       });
 
