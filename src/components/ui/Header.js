@@ -203,7 +203,9 @@ export default function Header(props) {
                     }
                     break;
                 case "/estimate":
-                    props.setValue(5);
+                    if (props.value !== false) {
+                        props.setValue(false);
+                    }
                     break;
                 default:
                     break;
@@ -239,7 +241,7 @@ export default function Header(props) {
                 color={"secondary"}
                 className={classes.button}
                 onClick={() => {
-                    props.setValue(5);
+                    props.setValue(false);
                 }}
             >
                 Free Estimate
@@ -319,7 +321,7 @@ export default function Header(props) {
                             selected: classes.drawerItemSelected
                         }}
                         to={"/estimate"}
-                        selected={props.value === 5}
+                        selected={props.value === false}
                     >
                         <ListItemText className={classes.drawerItem} disableTypography>
                             Free Estimate
